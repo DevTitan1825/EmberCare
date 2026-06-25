@@ -1,0 +1,2319 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EmberCare</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0f1117;
+  color: #e8e4f0;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 52px 24px 40px;
+  border-bottom: 1px solid #1e1b2e;
+}
+.header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #c4b5fd;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+.header p {
+  font-size: 0.78rem;
+  color: #7c7a8e;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Section */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 24px 0;
+}
+
+/* step label pill */
+.step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e1b2e;
+  border: 1px solid #3b2f6e;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #a78bfa;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.step-num {
+  background: #7c3aed;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+/* Phone frame */
+.phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+}
+.phone {
+  width: 300px;
+  background: #1c1b2e;
+  border: 2.5px solid #3b2f6e;
+  border-radius: 40px;
+  padding: 16px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px #00000066, 0 0 0 1px #2a2545;
+  position: relative;
+}
+.phone-notch {
+  width: 80px; height: 16px;
+  background: #0f1117;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 12px;
+  flex-shrink: 0;
+}
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: #7c7a8e;
+  padding: 0 6px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  padding: 0 4px;
+}
+
+/* Down arrow */
+.down-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0;
+  gap: 4px;
+}
+.down-arrow .arrow-line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, #7c3aed, #3b2f6e);
+  border-radius: 2px;
+}
+.down-arrow .arrow-head {
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #7c3aed;
+}
+.down-arrow .arrow-label {
+  font-size: 0.6rem;
+  color: #4a4766;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+
+/* Section description */
+.section-desc {
+  text-align: center;
+  max-width: 340px;
+  margin-bottom: 28px;
+}
+.section-desc h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e8e4f0;
+  margin-bottom: 6px;
+}
+.section-desc p {
+  font-size: 0.75rem;
+  color: #7c7a8e;
+  line-height: 1.6;
+}
+
+/* Inner UI components */
+.app-logo { text-align: center; margin: 10px 0 6px; }
+.logo-circle {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin: 0 auto 6px;
+}
+.logo-name { font-size: 1.1rem; font-weight: 800; color: #c4b5fd; }
+.logo-tag { font-size: 0.55rem; color: #7c7a8e; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.inp {
+  background: #13111f;
+  border: 1.5px solid #3b2f6e;
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 0.65rem;
+  color: #9b8fc0;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.btn-p { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff; }
+.btn-s { border: 1.5px solid #3b2f6e; color: #9b8fc0; }
+
+.divider {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.55rem; color: #4a4766; margin: 4px 0 8px;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: #2a2545;
+}
+
+.stitle { font-size: 0.78rem; font-weight: 700; color: #c4b5fd; margin-bottom: 4px; }
+.ssub { font-size: 0.6rem; color: #7c7a8e; line-height: 1.5; margin-bottom: 8px; }
+.slabel { font-size: 0.55rem; color: #7c7a8e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+
+.card {
+  background: #211d35;
+  border: 1px solid #3b2f6e;
+  border-radius: 12px;
+  padding: 9px 10px;
+  margin-bottom: 7px;
+}
+.card-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+.card-title { font-size: 0.65rem; font-weight: 700; color: #c4b5fd; }
+.card-sub { font-size: 0.55rem; color: #7c7a8e; }
+.badge {
+  background: #7c3aed22; color: #a78bfa;
+  font-size: 0.5rem; font-weight: 700;
+  padding: 2px 6px; border-radius: 5px;
+}
+
+.mood-row { display: flex; gap: 4px; margin-bottom: 8px; }
+.mood-chip {
+  flex: 1;
+  border: 1.5px solid #3b2f6e;
+  border-radius: 10px;
+  padding: 5px 2px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #7c7a8e;
+}
+.mood-chip.sel { border-color: #7c3aed; background: #7c3aed22; color: #a78bfa; }
+.mood-chip span { display: block; font-size: 0.44rem; margin-top: 1px; }
+
+.gauge { background: #13111f; border-radius: 6px; height: 7px; margin-bottom: 4px; overflow: hidden; }
+.gf { height: 100%; border-radius: 6px; }
+.g-green { background: linear-gradient(90deg, #10b981, #34d399); }
+.g-yellow { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.g-red { background: linear-gradient(90deg, #ef4444, #f87171); }
+.g-purple { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+
+.tag { display: inline-block; background: #2a2545; border-radius: 6px; padding: 3px 8px; font-size: 0.52rem; color: #9b8fc0; margin: 2px; }
+.tag.red-tag { background: #ef444422; color: #fca5a5; }
+.tag.yellow-tag { background: #f59e0b22; color: #fcd34d; }
+.tag.blue-tag { background: #6366f122; color: #a5b4fc; }
+.tag.purple-tag { background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed44; }
+
+.ai-box {
+  background: #211d35;
+  border-left: 3px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 7px 10px;
+  margin-bottom: 7px;
+}
+.ai-lbl { font-size: 0.5rem; color: #7c3aed; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.ai-txt { font-size: 0.6rem; color: #c4b5fd; line-height: 1.5; }
+
+.tbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.tbar-title { font-size: 0.85rem; font-weight: 700; color: #c4b5fd; }
+
+.bnav {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #2a2545;
+  padding: 8px 0 4px;
+  margin-top: 10px;
+}
+.nav-i {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 0.5rem; color: #4a4766;
+}
+.nav-i.act { color: #a78bfa; }
+.nav-i .ico { font-size: 1rem; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.stat-box {
+  background: #211d35;
+  border: 1px solid #3b2f6e;
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+}
+.stat-num { font-size: 1.1rem; font-weight: 800; color: #a78bfa; display: block; }
+.stat-lbl { font-size: 0.44rem; color: #7c7a8e; }
+
+.onb-option {
+  background: #1c1b2e;
+  border: 1.5px solid #3b2f6e;
+  border-radius: 12px;
+  padding: 9px 12px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.62rem; color: #9b8fc0;
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+.onb-option.sel { border-color: #7c3aed; background: #7c3aed11; color: #c4b5fd; }
+.check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #3b2f6e; flex-shrink: 0; }
+.check.done { background: #7c3aed; border-color: #7c3aed; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; color: #fff; }
+
+.journal-area {
+  background: #13111f;
+  border: 1.5px solid #3b2f6e;
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 0.6rem;
+  color: #6d6989;
+  font-style: italic;
+  line-height: 1.6;
+  min-height: 72px;
+  margin-bottom: 8px;
+}
+
+.circle-row-item {
+  background: #211d35;
+  border: 1px solid #3b2f6e;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px;
+}
+.cavs { display: flex; }
+.cav { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #1c1b2e; margin-left: -5px; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; color: #fff; }
+.cav:first-child { margin-left: 0; }
+
+.res-card {
+  background: #211d35;
+  border: 1px solid #3b2f6e;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 7px;
+  display: flex;
+}
+.res-thumb { width: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.res-body { padding: 8px 10px; }
+.res-title { font-size: 0.62rem; font-weight: 700; color: #c4b5fd; margin-bottom: 3px; }
+.res-meta { font-size: 0.5rem; color: #7c7a8e; display: flex; gap: 8px; }
+
+/* dots */
+.dots { display: flex; justify-content: center; gap: 5px; margin: 8px 0; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #2a2545; }
+.dot.act { background: #7c3aed; width: 14px; border-radius: 3px; }
+
+/* profile */
+.profile-pic { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg,#7c3aed,#ec4899); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 6px; border: 2px solid #3b2f6e; }
+.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 2px; border-bottom: 1px solid #1c1b2e; font-size: 0.6rem; color: #9b8fc0; }
+.toggle { width: 24px; height: 12px; border-radius: 6px; background: #7c3aed; position: relative; }
+.toggle::after { content: ''; position: absolute; right: 2px; top: 2px; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+
+/* crisis */
+.sos-btn { width: 80px; height: 80px; border-radius: 50%; background: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto; box-shadow: 0 0 0 10px #ef444422, 0 0 0 20px #ef444411; }
+.sos-t { font-size: 1.2rem; font-weight: 900; color: #fff; }
+.sos-s { font-size: 0.5rem; color: #fca5a5; }
+
+/* section divider rule */
+.section-end-pad { height: 0; }
+.final-note {
+  text-align: center;
+  padding: 60px 24px;
+  font-size: 0.75rem;
+  color: #4a4766;
+  border-top: 1px solid #1e1b2e;
+  margin-top: 56px;
+}
+
+/* enhanced experience layer */
+:root {
+  --page-bg: #0f1117;
+  --page-bg-soft: #171421;
+  --surface: #1c1b2e;
+  --surface-2: #211d35;
+  --surface-3: #13111f;
+  --border: #3b2f6e;
+  --border-soft: #2a2545;
+  --text: #e8e4f0;
+  --text-soft: #c4b5fd;
+  --muted: #7c7a8e;
+  --muted-2: #4a4766;
+  --accent: #7c3aed;
+  --accent-2: #4f46e5;
+  --accent-soft: #a78bfa;
+  --doodle: rgba(167, 139, 250, 0.18);
+  --sun: #ffd166;
+  --shadow: rgba(0, 0, 0, 0.42);
+}
+
+body.light-mode {
+  --page-bg: #fffaf2;
+  --page-bg-soft: #f7efe3;
+  --surface: #fffdf8;
+  --surface-2: #ffffff;
+  --surface-3: #f6efe5;
+  --border: #b8a4e6;
+  --border-soft: #dfd3f5;
+  --text: #252238;
+  --text-soft: #5a3fa1;
+  --muted: #6f6981;
+  --muted-2: #9a8fa6;
+  --accent: #6d4bd8;
+  --accent-2: #16a7a5;
+  --accent-soft: #7257d8;
+  --doodle: rgba(109, 75, 216, 0.16);
+  --shadow: rgba(88, 67, 120, 0.16);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(124, 58, 237, 0.16), transparent 26rem),
+    radial-gradient(circle at 86% 20%, rgba(16, 185, 129, 0.12), transparent 22rem),
+    linear-gradient(180deg, var(--page-bg), var(--page-bg-soft));
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background-color 420ms ease, color 420ms ease;
+}
+
+.header,
+.final-note {
+  border-color: var(--border-soft);
+}
+
+.header h1,
+.logo-name,
+.stitle,
+.section-desc h2,
+.tbar-title,
+.card-title,
+.res-title,
+.ai-txt {
+  color: var(--text-soft);
+}
+
+.section-desc p,
+.status-bar,
+.logo-tag,
+.ssub,
+.slabel,
+.card-sub,
+.stat-lbl,
+.setting-row,
+.res-meta,
+.nav-i,
+.arrow-label {
+  color: var(--muted);
+}
+
+.phone,
+.onb-option {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 22px 58px var(--shadow), 0 0 0 1px var(--border-soft);
+}
+
+.phone-notch,
+.inp,
+.journal-area,
+.gauge {
+  background: var(--surface-3);
+}
+
+.card,
+.ai-box,
+.stat-box,
+.circle-row-item,
+.res-card {
+  background: var(--surface-2);
+  border-color: var(--border);
+}
+
+.step-pill,
+.btn-s,
+.tag,
+.dot {
+  background: var(--border-soft);
+  border-color: var(--border);
+  color: var(--accent-soft);
+}
+
+.step-num,
+.btn-p,
+.dot.act,
+.toggle,
+.check.done {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+
+.down-arrow .arrow-line {
+  background: linear-gradient(to bottom, var(--accent), var(--border));
+}
+
+.down-arrow .arrow-head {
+  border-top-color: var(--accent);
+}
+
+.mood-chip.sel,
+.onb-option.sel,
+.tag.purple-tag,
+.badge {
+  border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent-soft);
+}
+
+[style*="#211d35"] { background: var(--surface-2) !important; }
+[style*="#1c1b2e"] { background: var(--surface) !important; }
+[style*="#13111f"] { background: var(--surface-3) !important; }
+[style*="#3b2f6e"] { border-color: var(--border) !important; }
+[style*="#c4b5fd"] { color: var(--text-soft) !important; }
+[style*="#7c7a8e"] { color: var(--muted) !important; }
+[style*="#4a4766"] { color: var(--muted-2) !important; }
+
+.doodle-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.doodle-bg span {
+  position: absolute;
+  display: block;
+  opacity: 0.72;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.08));
+}
+
+.doodle-loop {
+  width: 84px;
+  height: 46px;
+  border: 3px solid var(--doodle);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.doodle-flower {
+  width: 58px;
+  height: 58px;
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 55%, #fff) 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 18%, var(--doodle) 0 10px, transparent 11px),
+    radial-gradient(circle at 82% 50%, var(--doodle) 0 10px, transparent 11px),
+    radial-gradient(circle at 50% 82%, var(--doodle) 0 10px, transparent 11px),
+    radial-gradient(circle at 18% 50%, var(--doodle) 0 10px, transparent 11px);
+}
+
+.doodle-squiggle {
+  width: 96px;
+  height: 36px;
+  border-top: 4px solid var(--doodle);
+  border-radius: 50%;
+}
+
+.doodle-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--doodle);
+}
+
+.d1 { left: 7%; top: 18%; }
+.d2 { right: 9%; top: 13%; transform: rotate(22deg); }
+.d3 { left: 11%; top: 46%; transform: rotate(12deg); }
+.d4 { right: 13%; top: 54%; transform: rotate(-28deg); }
+.d5 { left: 18%; top: 76%; }
+.d6 { right: 18%; top: 82%; }
+.d7 { left: 5%; top: 64%; }
+.d8 { right: 6%; top: 35%; }
+
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 20;
+  width: 62px;
+  height: 62px;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sun) 0 24%, #f5a524 25% 38%, #3a3157 39% 100%);
+  box-shadow: 0 0 0 8px rgba(255, 209, 102, 0.16), 0 12px 28px var(--shadow);
+  cursor: pointer;
+  transition: transform 220ms ease, box-shadow 300ms ease, background 320ms ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 0 18px 8px rgba(255, 209, 102, 0.42);
+}
+
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 42px;
+  width: 10px;
+  height: 8px;
+  border-radius: 2px 2px 6px 6px;
+  background: #6b4d1d;
+}
+
+body:not(.light-mode) .theme-toggle {
+  background: #1b1a28;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38);
+}
+
+body:not(.light-mode) .theme-toggle::before {
+  background: #625f72;
+  box-shadow: none;
+}
+
+body:not(.light-mode) .theme-toggle::after {
+  background: #3f3c4f;
+}
+
+.mascot {
+  position: fixed;
+  left: clamp(12px, 3vw, 32px);
+  bottom: 18px;
+  z-index: 18;
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.mascot-bubble {
+  max-width: 190px;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 18px 18px 18px 6px;
+  padding: 10px 12px;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  box-shadow: 0 10px 28px var(--shadow);
+  transform-origin: left bottom;
+  animation: bubble-pop 700ms ease both;
+}
+
+.mascot-body {
+  width: 76px;
+  height: 86px;
+  border-radius: 46% 46% 42% 42%;
+  background: linear-gradient(160deg, #58d8c8, #6d4bd8);
+  border: 3px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 16px 32px var(--shadow);
+  position: relative;
+  animation: mascot-float 3.2s ease-in-out infinite;
+}
+
+.mascot-body::before,
+.mascot-body::after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  width: 12px;
+  height: 15px;
+  border-radius: 50%;
+  background: #171421;
+  box-shadow: inset 0 -4px 0 rgba(255,255,255,0.28);
+}
+
+.mascot-body::before { left: 21px; }
+.mascot-body::after { right: 21px; }
+
+.mascot-mouth {
+  position: absolute;
+  left: 31px;
+  top: 53px;
+  width: 16px;
+  height: 8px;
+  border-bottom: 3px solid #171421;
+  border-radius: 0 0 18px 18px;
+}
+
+.mascot-sprout {
+  position: absolute;
+  left: 31px;
+  top: -18px;
+  width: 18px;
+  height: 28px;
+  border-radius: 70% 0 70% 0;
+  background: #7ce4a6;
+  transform: rotate(-22deg);
+}
+
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  transition: opacity 720ms ease, transform 720ms cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-ready.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.section-desc h2,
+.section-desc p {
+  will-change: transform, opacity;
+}
+
+.section.is-visible .section-desc h2 {
+  animation: text-pop 620ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.section.is-visible .section-desc p {
+  animation: text-pop 620ms 110ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes text-pop {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes bubble-pop {
+  from { opacity: 0; transform: scale(0.86) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .theme-toggle {
+    width: 52px;
+    height: 52px;
+    top: 12px;
+    right: 12px;
+  }
+  .mascot {
+    transform: scale(0.82);
+    transform-origin: left bottom;
+  }
+  .mascot-bubble {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+  .reveal-ready {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* interactive app prototype */
+body[data-mood="calm"] { --flame-a: #ffcf66; --flame-b: #ff7a45; --flame-c: #fff2a8; }
+body[data-mood="stressed"] { --flame-a: #ff9f1c; --flame-b: #ef4444; --flame-c: #ffe08a; }
+body[data-mood="anxious"] { --flame-a: #7dd3fc; --flame-b: #6366f1; --flame-c: #e0f2fe; }
+body[data-mood="depressed"] { --flame-a: #93a4b8; --flame-b: #4f5f78; --flame-c: #dbeafe; }
+body[data-mood="upset"] { --flame-a: #fb7185; --flame-b: #db2777; --flame-c: #ffe4e6; }
+body[data-mood="overwhelmed"] { --flame-a: #c084fc; --flame-b: #7c3aed; --flame-c: #f3e8ff; }
+body[data-break-alert="urgent"] { --flame-a: #ff4d2d; --flame-b: #b91c1c; --flame-c: #fff1a8; }
+
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 28px auto 10px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px var(--shadow);
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+}
+
+.app-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.brand-name {
+  font-size: 0.96rem;
+  font-weight: 850;
+  color: var(--text-soft);
+}
+
+.brand-sub {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.app-nav::-webkit-scrollbar { display: none; }
+
+.app-nav button,
+.app-button,
+.link-button,
+.mood-option,
+.exercise-card,
+.choice-card,
+.mini-action,
+.quick-tile {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-nav button {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  transition: 180ms ease;
+}
+
+.app-nav button:hover,
+.app-nav button.active {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  color: var(--accent-soft);
+}
+
+.app-user-chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--text-soft);
+  background: var(--surface-2);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.app-screen {
+  display: none;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.app-screen.active {
+  display: block;
+  animation: app-in 420ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.auth-grid,
+.dash-grid,
+.resource-grid,
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.app-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(16px, 2.2vw, 24px);
+}
+
+.app-panel h2,
+.app-panel h3 {
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  letter-spacing: 0;
+}
+
+.app-panel p {
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+.app-title {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0;
+  margin-bottom: 14px;
+}
+
+.app-title span {
+  color: var(--accent-soft);
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.app-input,
+.app-select,
+.journal-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-3);
+  color: var(--text);
+  padding: 12px 13px;
+  font: inherit;
+  outline: none;
+}
+
+.journal-input {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.app-input:focus,
+.app-select:focus,
+.journal-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.app-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 800;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.app-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.app-button.secondary {
+  background: transparent;
+  color: var(--accent-soft);
+  border: 1px solid var(--border);
+}
+
+.link-button {
+  border: 0;
+  background: transparent;
+  color: var(--accent-soft);
+  font-weight: 800;
+}
+
+.choice-grid,
+.mood-grid,
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.choice-card,
+.mood-option,
+.quick-tile {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 14px;
+  text-align: left;
+  transition: 180ms ease;
+}
+
+.choice-card.selected,
+.mood-option.active,
+.quick-tile:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+  transform: translateY(-2px);
+}
+
+.choice-card strong,
+.mood-option strong,
+.quick-tile strong {
+  display: block;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+.mood-option .mood-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--mood-color, var(--accent));
+  margin-right: 6px;
+  box-shadow: 0 0 16px var(--mood-color, var(--accent));
+}
+
+.exercise-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.exercise-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 12px;
+  color: var(--text);
+  text-align: left;
+}
+
+.exercise-card.done {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 14%, var(--surface));
+}
+
+.exercise-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface-3));
+}
+
+.exercise-card small,
+.quick-tile small,
+.choice-card small,
+.mood-option small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.dashboard-hero {
+  display: grid;
+  gap: 16px;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 14px;
+}
+
+.metric b {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--text-soft);
+}
+
+.metric span {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.metric small {
+  display: block;
+  color: var(--muted);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+.energy-control {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.energy-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.burnout-form {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(180px, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.burnout-result {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.break-alert {
+  margin-top: 12px;
+  display: none;
+  border: 1px solid #ef4444;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, #ef4444 18%, var(--surface));
+  color: #fecaca;
+  font-weight: 900;
+}
+
+body[data-break-alert="urgent"] .break-alert {
+  display: block;
+}
+
+.progress-line {
+  height: 9px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-line div {
+  height: 100%;
+  width: var(--value, 50%);
+  background: linear-gradient(90deg, var(--flame-a), var(--flame-b));
+  border-radius: inherit;
+}
+
+.mini-action {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.mini-action:hover {
+  border-color: var(--accent);
+  color: var(--accent-soft);
+}
+
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 102px;
+  z-index: 30;
+  max-width: 280px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  box-shadow: 0 18px 40px var(--shadow);
+  padding: 12px 14px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: 220ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mascot.flame-friend {
+  align-items: center;
+  gap: 12px;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.mascot.flame-friend.dragging {
+  cursor: grabbing;
+}
+
+.flame-friend .mascot-bubble {
+  border-radius: 18px 18px 18px 6px;
+}
+
+.flame-body {
+  width: 104px;
+  height: 124px;
+  position: relative;
+  filter:
+    drop-shadow(0 0 12px color-mix(in srgb, var(--flame-a, #ffcf66) 44%, transparent))
+    drop-shadow(0 18px 26px color-mix(in srgb, var(--flame-b, #ff7a45) 42%, transparent));
+  animation: flame-wander 5.4s ease-in-out infinite, flame-heat 1.35s ease-in-out infinite;
+}
+
+.flame-core {
+  position: absolute;
+  left: 14px;
+  right: 13px;
+  bottom: 4px;
+  height: 82px;
+  border-radius: 48% 52% 47% 53% / 72% 74% 28% 28%;
+  background:
+    radial-gradient(circle at 50% 67%, var(--flame-c, #fff2a8) 0 15%, transparent 16%),
+    radial-gradient(circle at 44% 56%, color-mix(in srgb, var(--flame-c, #fff2a8) 72%, transparent) 0 19%, transparent 20%),
+    linear-gradient(160deg, var(--flame-a, #ffcf66) 0 20%, #ff8b2c 44%, var(--flame-b, #ff7a45) 84%);
+  clip-path: polygon(50% 0%, 66% 18%, 72% 35%, 92% 47%, 79% 72%, 72% 100%, 28% 100%, 18% 76%, 8% 54%, 27% 35%, 34% 16%);
+  transform: rotate(-3deg);
+  animation: flame-flicker 1.2s ease-in-out infinite;
+}
+
+.flame-core::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 21px;
+  width: 28px;
+  height: 48px;
+  border-radius: 52% 48% 44% 56% / 72% 72% 28% 28%;
+  background: linear-gradient(160deg, #fff7b8, var(--flame-c, #fff2a8) 45%, transparent 86%);
+  clip-path: polygon(50% 0%, 76% 30%, 70% 100%, 30% 100%, 18% 42%);
+  transform: rotate(4deg);
+  animation: inner-flame 980ms ease-in-out infinite;
+}
+
+.flame-core::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 28px;
+  height: 58px;
+  border-radius: 80% 20% 64% 36%;
+  background: color-mix(in srgb, var(--flame-a, #ffcf66) 66%, transparent);
+  clip-path: polygon(54% 0%, 84% 38%, 58% 100%, 12% 68%, 24% 28%);
+  transform: rotate(-22deg);
+  animation: side-flame 1.45s ease-in-out infinite;
+}
+
+.flame-tongue {
+  position: absolute;
+  bottom: 31px;
+  z-index: 1;
+  width: 25px;
+  height: 48px;
+  border-radius: 70% 30% 60% 40%;
+  background: linear-gradient(180deg, var(--flame-c, #fff2a8), var(--flame-a, #ffcf66));
+  opacity: 0.94;
+  transform-origin: bottom center;
+  animation: tongue-flicker 1.1s ease-in-out infinite;
+}
+
+.flame-tongue.one {
+  left: 9px;
+  transform: rotate(-28deg);
+}
+
+.flame-tongue.two {
+  right: 6px;
+  bottom: 25px;
+  height: 42px;
+  transform: rotate(25deg);
+  animation-delay: -420ms;
+}
+
+.flame-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flame-c, #fff2a8);
+  box-shadow: 0 0 12px var(--flame-a, #ffcf66);
+  opacity: 0;
+  animation: spark-rise 1.8s ease-in-out infinite;
+}
+
+.flame-spark.one { left: 4px; top: 30px; }
+.flame-spark.two { right: 7px; top: 12px; animation-delay: -650ms; }
+.flame-spark.three { left: 40px; top: -2px; animation-delay: -1.1s; }
+
+.flame-shadow {
+  position: absolute;
+  left: 19px;
+  right: 18px;
+  bottom: 0;
+  height: 14px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--flame-b, #ff7a45) 34%, transparent);
+  filter: blur(7px);
+  opacity: 0.75;
+}
+
+.flame-eye {
+  position: absolute;
+  z-index: 2;
+  top: 49px;
+  width: 9px;
+  height: 12px;
+  border-radius: 50%;
+  background: #241727;
+  transition: 180ms ease;
+}
+
+.flame-eye.left { left: 39px; }
+.flame-eye.right { right: 36px; }
+
+.flame-mouth {
+  position: absolute;
+  z-index: 2;
+  left: 45px;
+  top: 74px;
+  width: 17px;
+  height: 9px;
+  border-bottom: 3px solid #241727;
+  border-radius: 0 0 16px 16px;
+  transition: 180ms ease;
+}
+
+.flame-blush {
+  position: absolute;
+  z-index: 2;
+  top: 51px;
+  width: 11px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.42);
+}
+
+.flame-blush.left { left: 29px; }
+.flame-blush.right { right: 27px; }
+
+.snore {
+  position: absolute;
+  z-index: 3;
+  right: -8px;
+  top: 4px;
+  color: var(--flame-c, #fff2a8);
+  font-weight: 900;
+  opacity: 0;
+}
+
+.mascot.is-idle .flame-eye {
+  height: 3px;
+  top: 54px;
+  border-radius: 999px;
+}
+
+.mascot.is-idle .flame-mouth {
+  width: 10px;
+  height: 10px;
+  left: 39px;
+  border: 3px solid #241727;
+  border-radius: 50%;
+}
+
+body[data-break-alert="urgent"] .flame-eye {
+  height: 8px;
+  border-radius: 999px;
+  transform: rotate(18deg);
+}
+
+body[data-break-alert="urgent"] .flame-eye.right {
+  transform: rotate(-18deg);
+}
+
+body[data-break-alert="urgent"] .flame-mouth {
+  left: 43px;
+  top: 78px;
+  width: 22px;
+  height: 8px;
+  border: 0;
+  border-top: 4px solid #241727;
+  border-radius: 50% 50% 0 0;
+}
+
+.mascot.is-idle .snore {
+  animation: snore-rise 1.8s ease-in-out infinite;
+}
+
+@keyframes app-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: rotate(-4deg) scale(1, 1); }
+  25% { transform: rotate(2deg) scale(0.96, 1.05); }
+  50% { transform: rotate(4deg) scale(1.04, 0.98); }
+  75% { transform: rotate(-1deg) scale(0.98, 1.04); }
+}
+
+@keyframes flame-wander {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg); }
+  28% { transform: translate(9px, -7px) rotate(3deg); }
+  58% { transform: translate(-6px, -2px) rotate(-4deg); }
+  78% { transform: translate(4px, 5px) rotate(2deg); }
+}
+
+@keyframes flame-heat {
+  0%, 100% { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--flame-a, #ffcf66) 42%, transparent)) drop-shadow(0 18px 26px color-mix(in srgb, var(--flame-b, #ff7a45) 42%, transparent)); }
+  50% { filter: drop-shadow(0 0 20px color-mix(in srgb, var(--flame-a, #ffcf66) 68%, transparent)) drop-shadow(0 22px 34px color-mix(in srgb, var(--flame-b, #ff7a45) 56%, transparent)); }
+}
+
+@keyframes inner-flame {
+  0%, 100% { transform: translateY(0) rotate(4deg) scale(1); opacity: 0.96; }
+  50% { transform: translateY(-4px) rotate(-5deg) scale(0.9, 1.08); opacity: 0.78; }
+}
+
+@keyframes side-flame {
+  0%, 100% { transform: rotate(-24deg) translateY(0); opacity: 0.72; }
+  50% { transform: rotate(-12deg) translateY(-7px); opacity: 0.44; }
+}
+
+@keyframes tongue-flicker {
+  0%, 100% { transform: rotate(-26deg) scale(1); opacity: 0.8; }
+  50% { transform: rotate(-8deg) scale(0.86, 1.16); opacity: 0.98; }
+}
+
+@keyframes spark-rise {
+  0% { opacity: 0; transform: translateY(16px) scale(0.5); }
+  28% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-28px) scale(1.1); }
+}
+
+@keyframes snore-rise {
+  0% { opacity: 0; transform: translate(0, 0) scale(.7); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(18px, -30px) scale(1.25); }
+}
+
+@media (max-width: 900px) {
+  .app-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .auth-grid,
+  .dash-grid,
+  .resource-grid,
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .choice-grid,
+  .mood-grid,
+  .quick-grid,
+  .metric-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: calc(100% - 20px);
+    border-radius: 18px;
+  }
+  .choice-grid,
+  .mood-grid,
+  .quick-grid,
+  .metric-row {
+    grid-template-columns: 1fr;
+  }
+  .exercise-card {
+    grid-template-columns: auto 1fr;
+  }
+  .exercise-card .mini-action {
+    grid-column: 1 / -1;
+  }
+  .toast {
+    left: 12px;
+    right: 12px;
+    bottom: 86px;
+    max-width: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="doodle-bg" aria-hidden="true">
+  <span class="doodle-loop d1"></span>
+  <span class="doodle-flower d2"></span>
+  <span class="doodle-squiggle d3"></span>
+  <span class="doodle-loop d4"></span>
+  <span class="doodle-dot d5"></span>
+  <span class="doodle-flower d6"></span>
+  <span class="doodle-squiggle d7"></span>
+  <span class="doodle-dot d8"></span>
+</div>
+
+<button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light and dark mode"></button>
+
+<div class="mascot flame-friend" role="button" tabindex="0" aria-label="EmberCare flame companion">
+  <div class="mascot-bubble">Hi, I'm Lumi. I glow with your mood and keep you company.</div>
+  <div class="flame-body" aria-hidden="true">
+    <div class="flame-shadow"></div>
+    <div class="flame-tongue one"></div>
+    <div class="flame-tongue two"></div>
+    <div class="flame-core"></div>
+    <div class="flame-spark one"></div>
+    <div class="flame-spark two"></div>
+    <div class="flame-spark three"></div>
+    <div class="flame-eye left"></div>
+    <div class="flame-eye right"></div>
+    <div class="flame-blush left"></div>
+    <div class="flame-blush right"></div>
+    <div class="flame-mouth"></div>
+    <div class="snore">Zz</div>
+  </div>
+</div>
+
+<main class="app-shell" id="interactive-app">
+  <div class="app-topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark">E</div>
+      <div>
+        <div class="brand-name">EmberCare</div>
+        <div class="brand-sub">Interactive wellness prototype</div>
+      </div>
+    </div>
+    <nav class="app-nav" aria-label="EmberCare app navigation">
+      <button type="button" class="active" data-screen-target="login">Login</button>
+      <button type="button" data-screen-target="onboarding">Onboarding</button>
+      <button type="button" data-screen-target="dashboard">Dashboard</button>
+      <button type="button" data-screen-target="mood">Feelings</button>
+      <button type="button" data-screen-target="journal">Journal</button>
+      <button type="button" data-screen-target="library">Library</button>
+      <button type="button" data-screen-target="circles">Circles</button>
+      <button type="button" data-screen-target="sos">SOS</button>
+      <button type="button" data-screen-target="profile">Profile</button>
+    </nav>
+    <div class="app-user-chip" data-user-chip>Guest mode</div>
+  </div>
+
+  <section class="app-screen active" data-screen="login">
+    <div class="auth-grid">
+      <div class="app-panel">
+        <h1 class="app-title">A calmer campus day starts <span>right here.</span></h1>
+        <p>Sign in with a demo profile and EmberCare will unlock the dashboard, mood tools, journal, circles and SOS support. This is a local prototype, so nothing is sent anywhere.</p>
+        <form class="auth-form" data-login-form>
+          <label>Your name
+            <input class="app-input" name="name" type="text" value="Alex" autocomplete="name">
+          </label>
+          <label>Email
+            <input class="app-input" name="email" type="email" value="alex@student.edu" autocomplete="email">
+          </label>
+          <label>Password
+            <input class="app-input" name="password" type="password" value="embercare" autocomplete="current-password">
+          </label>
+          <button class="app-button" type="submit">Continue to dashboard</button>
+          <button class="app-button secondary" type="button" data-demo-login>Try instant demo login</button>
+        </form>
+      </div>
+      <div class="app-panel">
+        <h2>What becomes usable</h2>
+        <div class="quick-grid" style="margin-top:14px;">
+          <button class="quick-tile" type="button" data-screen-target="mood"><strong>Feeling check-in</strong><small>Pick stressed, anxious, upset and more.</small></button>
+          <button class="quick-tile" type="button" data-screen-target="journal"><strong>Private journal</strong><small>Write a note and get a gentle reflection.</small></button>
+          <button class="quick-tile" type="button" data-screen-target="library"><strong>Exercises</strong><small>Breathing, grounding, rest and focus cards.</small></button>
+          <button class="quick-tile" type="button" data-screen-target="sos"><strong>Support now</strong><small>Fast access to calming tools and crisis contacts.</small></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="onboarding">
+    <div class="app-panel">
+      <h2>Personalise EmberCare</h2>
+      <p>Choose what you want help with. These choices update the dashboard plan.</p>
+      <div class="choice-grid" style="margin-top:16px;">
+        <button class="choice-card selected" type="button" data-choice="Stress"><strong>Stress</strong><small>Study pressure and deadlines</small></button>
+        <button class="choice-card selected" type="button" data-choice="Sleep"><strong>Sleep</strong><small>Wind down and recharge</small></button>
+        <button class="choice-card" type="button" data-choice="Anxiety"><strong>Anxiety</strong><small>Grounding and calm prompts</small></button>
+        <button class="choice-card" type="button" data-choice="Focus"><strong>Focus</strong><small>Short plans and reminders</small></button>
+        <button class="choice-card" type="button" data-choice="Community"><strong>Community</strong><small>Anonymous peer circles</small></button>
+        <button class="choice-card" type="button" data-choice="Burnout"><strong>Burnout</strong><small>Early risk check-ins</small></button>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+        <button class="app-button" type="button" data-screen-target="dashboard">Save and open dashboard</button>
+        <button class="app-button secondary" type="button" data-screen-target="mood">Choose how I feel now</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="dashboard">
+    <div class="dash-grid">
+      <div class="app-panel dashboard-hero">
+        <div>
+          <h2 data-dashboard-greeting>Good morning, Alex</h2>
+          <p data-dashboard-summary>Your current mood is calm. Pick a feeling any time and Lumi will change color with you.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><b data-streak>7</b><span>day streak</span><small data-streak-copy>Increases once each new day you open EmberCare.</small></div>
+          <div class="metric">
+            <b data-energy>68%</b>
+            <span>energy score</span>
+            <label class="energy-control">How is your energy level today?
+              <input type="range" min="0" max="100" value="68" data-energy-meter aria-label="Choose today's energy level">
+            </label>
+          </div>
+          <div class="metric"><b data-risk>Low</b><span>burnout risk</span><small data-risk-copy>Based on work hours and break quality.</small></div>
+        </div>
+        <div>
+          <p><strong style="color:var(--text-soft);">Today's gentle plan</strong></p>
+          <div class="progress-line"><div style="--value:64%;"></div></div>
+        </div>
+        <div class="app-panel" style="padding:14px;">
+          <h3>Break and burnout check</h3>
+          <p>How long have you worked today?</p>
+          <div class="burnout-form">
+            <label>Total hours
+              <input class="app-input" type="number" min="0" max="24" step="0.5" value="0" data-work-hours>
+            </label>
+            <label>With or without breaks?
+              <select class="app-select" data-break-mode>
+                <option value="with">With adequate breaks</option>
+                <option value="without">Without breaks</option>
+              </select>
+            </label>
+            <button class="app-button" type="button" data-check-burnout>Check</button>
+          </div>
+          <div class="burnout-result" data-break-result>Enter your work hours to get a break suggestion.</div>
+          <div class="break-alert">Please take a break now.</div>
+        </div>
+        <div class="quick-grid">
+          <button class="mini-action" type="button" data-screen-target="mood">Check mood</button>
+          <button class="mini-action" type="button" data-screen-target="journal">Journal</button>
+          <button class="mini-action" type="button" data-screen-target="library">Open exercises</button>
+          <button class="mini-action" type="button" data-screen-target="sos">SOS support</button>
+        </div>
+      </div>
+      <div class="app-panel">
+        <h3>Recommended now</h3>
+        <div class="exercise-list" data-dashboard-exercises></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="mood">
+    <div class="dash-grid">
+      <div class="app-panel">
+        <h2>How are you feeling?</h2>
+        <p>Tap one and EmberCare will suggest quick, easy exercises. Lumi changes color to match what you chose.</p>
+        <div class="mood-grid" style="margin-top:16px;">
+          <button class="mood-option active" type="button" data-mood="calm" style="--mood-color:#ffcf66;"><strong><span class="mood-dot"></span>Calm</strong><small>Keep the balance going</small></button>
+          <button class="mood-option" type="button" data-mood="stressed" style="--mood-color:#ef4444;"><strong><span class="mood-dot"></span>Stressed</strong><small>Pressure, deadlines, tension</small></button>
+          <button class="mood-option" type="button" data-mood="anxious" style="--mood-color:#6366f1;"><strong><span class="mood-dot"></span>Anxious</strong><small>Racing thoughts or worry</small></button>
+          <button class="mood-option" type="button" data-mood="depressed" style="--mood-color:#64748b;"><strong><span class="mood-dot"></span>Depressed</strong><small>Low, heavy, disconnected</small></button>
+          <button class="mood-option" type="button" data-mood="upset" style="--mood-color:#db2777;"><strong><span class="mood-dot"></span>Upset</strong><small>Hurt, angry or tearful</small></button>
+          <button class="mood-option" type="button" data-mood="overwhelmed" style="--mood-color:#7c3aed;"><strong><span class="mood-dot"></span>Overwhelmed</strong><small>Too much at once</small></button>
+        </div>
+      </div>
+      <div class="app-panel">
+        <h3 data-exercise-title>Quick exercises for calm</h3>
+        <p data-exercise-copy>Small actions you can do in under five minutes.</p>
+        <div class="exercise-list" data-exercise-list></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="journal">
+    <div class="resource-grid">
+      <div class="app-panel">
+        <h2>Private journal</h2>
+        <p>Write what is on your mind. The reflection is generated locally in this prototype.</p>
+        <textarea class="journal-input" data-journal-input placeholder="Today I feel..."></textarea>
+        <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+          <button class="app-button" type="button" data-save-journal>Save entry</button>
+          <button class="app-button secondary" type="button" data-fill-journal>Give me a prompt</button>
+        </div>
+      </div>
+      <div class="app-panel">
+        <h3>Gentle reflection</h3>
+        <p data-journal-reflection>When you save an entry, EmberCare will mirror back a small supportive next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="library">
+    <div class="app-panel">
+      <h2>Self-help library</h2>
+      <p>Click any resource to mark it as started and update your dashboard.</p>
+      <div class="quick-grid" style="margin-top:16px;">
+        <button class="quick-tile" type="button" data-resource="Box breathing"><strong>Box breathing</strong><small>5 min video for anxiety</small></button>
+        <button class="quick-tile" type="button" data-resource="Sleep wind-down"><strong>Sleep wind-down</strong><small>12 min audio guide</small></button>
+        <button class="quick-tile" type="button" data-resource="Grounding 5-4-3-2-1"><strong>Grounding 5-4-3-2-1</strong><small>3 min reset exercise</small></button>
+        <button class="quick-tile" type="button" data-resource="Burnout guide"><strong>Burnout guide</strong><small>Student-friendly article</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="circles">
+    <div class="app-panel">
+      <h2>Anonymous circles</h2>
+      <p>Join a supportive room using a flower name. This prototype simulates the join flow.</p>
+      <div class="quick-grid" style="margin-top:16px;">
+        <button class="quick-tile" type="button" data-circle="Exam Stress Circle"><strong>Exam Stress Circle</strong><small>23 members live</small></button>
+        <button class="quick-tile" type="button" data-circle="Sleep Reset Circle"><strong>Sleep Reset Circle</strong><small>Starts in 20 min</small></button>
+        <button class="quick-tile" type="button" data-circle="First Year Support"><strong>First Year Support</strong><small>Anonymous peer chat</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="sos">
+    <div class="resource-grid">
+      <div class="app-panel">
+        <h2>Immediate support</h2>
+        <p>If someone may be in immediate danger, contact local emergency services. This screen keeps calm tools and contacts close.</p>
+        <div class="quick-grid" style="margin-top:16px;">
+          <button class="quick-tile" type="button" data-sos="Start 60-second grounding"><strong>Ground me now</strong><small>60-second sensory reset</small></button>
+          <button class="quick-tile" type="button" data-sos="Open counsellor chat"><strong>Counsellor chat</strong><small>Simulated university support</small></button>
+          <button class="quick-tile" type="button" data-sos="Show helpline"><strong>Crisis helpline</strong><small>iCall 9152987821</small></button>
+        </div>
+      </div>
+      <div class="app-panel">
+        <h3>Calm prompt</h3>
+        <p data-sos-copy>Put both feet on the floor. Name five things you can see. Let Lumi stay bright beside you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-screen" data-screen="profile">
+    <div class="profile-grid">
+      <div class="app-panel">
+        <h2>Profile controls</h2>
+        <p>Make the prototype feel like an account screen with working controls.</p>
+        <div class="auth-form">
+          <label>Display name
+            <input class="app-input" data-profile-name value="Alex">
+          </label>
+          <label>University
+            <input class="app-input" value="State University">
+          </label>
+          <label>Preferred support tone
+            <select class="app-select" data-tone-select>
+              <option>Warm and encouraging</option>
+              <option>Direct and practical</option>
+              <option>Soft and quiet</option>
+            </select>
+          </label>
+          <button class="app-button" type="button" data-save-profile>Save profile</button>
+        </div>
+      </div>
+      <div class="app-panel">
+        <h3>Privacy toggles</h3>
+        <div class="quick-grid" style="margin-top:12px;">
+          <button class="quick-tile" type="button" data-toggle-setting="Health sync"><strong>Health sync</strong><small data-setting-state>On</small></button>
+          <button class="quick-tile" type="button" data-toggle-setting="Notifications"><strong>Notifications</strong><small data-setting-state>On</small></button>
+          <button class="quick-tile" type="button" data-toggle-setting="Anonymous circles"><strong>Anonymous circles</strong><small data-setting-state>On</small></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const themeToggle = document.querySelector('.theme-toggle');
+const mascot = document.querySelector('.mascot');
+const mascotBubble = document.querySelector('.mascot-bubble');
+const userChip = document.querySelector('[data-user-chip]');
+const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+let savedTheme = null;
+try {
+  savedTheme = localStorage.getItem('embercare-theme');
+} catch (error) {
+  savedTheme = null;
+}
+
+function readNumber(key, fallback) {
+  try {
+    const rawValue = localStorage.getItem(key);
+    if (rawValue === null || rawValue === '') return fallback;
+    const value = Number(rawValue);
+    return Number.isFinite(value) ? value : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, String(value));
+  } catch (error) {}
+}
+
+function daysBetween(start, end) {
+  const startDate = new Date(`${start}T00:00:00`);
+  const endDate = new Date(`${end}T00:00:00`);
+  const diff = Math.floor((endDate - startDate) / 86400000);
+  return Number.isFinite(diff) ? Math.max(0, diff) : 0;
+}
+
+function getDailyStreak() {
+  const today = new Date().toISOString().slice(0, 10);
+  let streak = Math.max(7, readNumber('embercare-streak', 7));
+  let lastSeen = null;
+  try {
+    lastSeen = localStorage.getItem('embercare-last-seen');
+  } catch (error) {
+    lastSeen = null;
+  }
+  if (lastSeen && lastSeen !== today) {
+    streak += daysBetween(lastSeen, today);
+  }
+  writeStorage('embercare-streak', streak);
+  writeStorage('embercare-last-seen', today);
+  return streak;
+}
+
+const appState = {
+  user: 'Alex',
+  mood: 'calm',
+  streak: getDailyStreak(),
+  energy: readNumber('embercare-energy', 68),
+  risk: 'Low',
+  breakAdvice: 'Enter your work hours to get a break suggestion.',
+  breakAlert: false,
+  completedExercises: 0,
+  choices: ['Stress', 'Sleep']
+};
+
+const moodData = {
+  calm: {
+    label: 'calm',
+    summary: 'Your current mood is calm. Keep the day steady with a small grounding ritual.',
+    risk: 'Low',
+    energy: 72,
+    mascot: "I'm glowing steady. Let's keep this soft rhythm.",
+    exercises: [
+      ['&#127807;', 'Two-minute gratitude scan', 'Name three small things that feel okay right now.'],
+      ['&#9728;&#65039;', 'Sunlight reset', 'Look toward natural light and take six slow breaths.'],
+      ['&#129496;', 'Tiny stretch', 'Roll your shoulders, unclench your jaw, and relax your hands.']
+    ]
+  },
+  stressed: {
+    label: 'stressed',
+    summary: "Stress usually wants action. Let's make the next step smaller.",
+    risk: 'Medium',
+    energy: 54,
+    mascot: "I'm burning warmer for stress. One tiny step, then the next.",
+    exercises: [
+      ['&#128293;', '4-4-6 breathing', 'Inhale 4, hold 4, exhale 6. Repeat four times.'],
+      ['&#128221;', 'Brain dump', 'Write every task for one minute, then circle just one to start.'],
+      ['&#128167;', 'Tension release', 'Squeeze your fists for five seconds, then let go slowly.']
+    ]
+  },
+  anxious: {
+    label: 'anxious',
+    summary: 'Anxiety can feel loud. Grounding brings your attention back to here.',
+    risk: 'Medium',
+    energy: 49,
+    mascot: "I turned blue-violet with you. Let's find the ground together.",
+    exercises: [
+      ['&#128064;', '5-4-3-2-1 grounding', 'Name 5 things you see, 4 you feel, 3 you hear, 2 you smell, 1 you taste.'],
+      ['&#129729;', 'Long exhale', 'Breathe in gently, then exhale longer than you inhale. Do this ten times.'],
+      ['&#129482;', 'Temperature shift', 'Hold something cool or splash cool water on your hands.']
+    ]
+  },
+  depressed: {
+    label: 'low',
+    summary: 'Low mood asks for kindness and very small movement.',
+    risk: 'Watch',
+    energy: 35,
+    mascot: "I'm dimmer, but still here. We can do the smallest useful thing.",
+    exercises: [
+      ['&#129695;', 'Open the room', 'Open a curtain or window for thirty seconds. That counts.'],
+      ['&#129380;', 'Water first', 'Take three sips of water and notice the temperature.'],
+      ['&#128233;', 'Reach one person', 'Send a tiny "thinking of you" or "can we talk later?" message.']
+    ]
+  },
+  upset: {
+    label: 'upset',
+    summary: 'Big feelings need room before solutions. Start by naming what hurt.',
+    risk: 'Medium',
+    energy: 46,
+    mascot: "I'm pink-hot with you. Feelings are allowed to move through.",
+    exercises: [
+      ['&#128151;', 'Name it plainly', 'Say: "I feel upset because..." without judging the answer.'],
+      ['&#128694;', 'Walk the edge off', 'Walk slowly for two minutes and count your steps.'],
+      ['&#9995;', 'Hand on chest', 'Place a hand on your chest and breathe into that contact.']
+    ]
+  },
+  overwhelmed: {
+    label: 'overwhelmed',
+    summary: 'When everything feels like too much, the goal is one clear next move.',
+    risk: 'High',
+    energy: 41,
+    mascot: "I went purple-bright. Let's shrink the mountain into one pebble.",
+    exercises: [
+      ['&#128230;', 'Box the day', 'Write "now, next, later" and move every worry into one box.'],
+      ['&#9201;&#65039;', 'Three-minute timer', 'Set a timer and do only the easiest visible task.'],
+      ['&#128277;', 'Reduce input', 'Mute one notification or close one extra tab for ten minutes.']
+    ]
+  }
+};
+
+function setTheme(mode) {
+  const isLight = mode === 'light';
+  document.body.classList.toggle('light-mode', isLight);
+  themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  themeToggle.title = isLight ? 'Bulb on: light mode' : 'Bulb off: dark mode';
+  try {
+    localStorage.setItem('embercare-theme', mode);
+  } catch (error) {}
+}
+
+function showToast(message) {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+function setMascotMessage(message) {
+  mascotBubble.textContent = message;
+  mascotBubble.style.animation = 'none';
+  requestAnimationFrame(() => {
+    mascotBubble.style.animation = '';
+  });
+}
+
+function setScreen(screen) {
+  document.querySelectorAll('.app-screen').forEach((section) => {
+    section.classList.toggle('active', section.dataset.screen === screen);
+  });
+  document.querySelectorAll('[data-screen-target]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.screenTarget === screen);
+  });
+  if (screen === 'mood') setMascotMessage('Pick a feeling and I will change color with you.');
+  if (screen === 'dashboard') setMascotMessage('Dashboard opened. I am looking around with you.');
+  document.getElementById('interactive-app')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function buildExerciseCard(item) {
+  const [icon, title, copy] = item;
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'exercise-card';
+  card.innerHTML = `
+    <span class="exercise-icon">${icon}</span>
+    <span><strong>${title}</strong><small>${copy}</small></span>
+    <span class="mini-action">Done</span>
+  `;
+  card.addEventListener('click', () => {
+    if (!card.classList.contains('done')) {
+      appState.completedExercises += 1;
+      card.classList.add('done');
+      showToast(`Nice. "${title}" is marked complete.`);
+      setMascotMessage('That counted. Small care is still care.');
+      updateDashboard();
+    }
+  });
+  return card;
+}
+
+function renderExercises() {
+  const data = moodData[appState.mood];
+  const list = document.querySelector('[data-exercise-list]');
+  const dashList = document.querySelector('[data-dashboard-exercises]');
+  document.querySelector('[data-exercise-title]').textContent = `Quick exercises for ${data.label}`;
+  document.querySelector('[data-exercise-copy]').textContent = 'Choose one. Finishing even a tiny exercise updates your dashboard.';
+  list.innerHTML = '';
+  dashList.innerHTML = '';
+  data.exercises.forEach((item) => list.appendChild(buildExerciseCard(item)));
+  data.exercises.slice(0, 2).forEach((item) => dashList.appendChild(buildExerciseCard(item)));
+}
+
+function setMood(mood) {
+  appState.mood = mood;
+  const data = moodData[mood];
+  document.body.dataset.mood = mood;
+  document.querySelectorAll('.mood-option').forEach((button) => {
+    button.classList.toggle('active', button.dataset.mood === mood);
+  });
+  renderExercises();
+  updateDashboard();
+  setMascotMessage(data.mascot);
+  showToast(`Lumi shifted color for feeling ${data.label}.`);
+}
+
+function updateDashboard() {
+  const data = moodData[appState.mood];
+  document.querySelector('[data-dashboard-greeting]').textContent = `Good morning, ${appState.user}`;
+  document.querySelector('[data-dashboard-summary]').textContent = data.summary;
+  document.querySelector('[data-streak]').textContent = appState.streak;
+  document.querySelector('[data-energy]').textContent = `${appState.energy}%`;
+  document.querySelector('[data-risk]').textContent = appState.risk;
+  document.querySelector('[data-energy-meter]').value = appState.energy;
+  document.querySelector('[data-risk-copy]').textContent = appState.breakAdvice;
+  document.querySelector('[data-break-result]').textContent = appState.breakAdvice;
+  document.body.dataset.breakAlert = appState.breakAlert ? 'urgent' : 'normal';
+  userChip.textContent = `${appState.user} - ${data.label}`;
+}
+
+function formatHours(hours) {
+  if (hours === 1) return '1 hour';
+  if (hours % 1 === 0) return `${hours} hours`;
+  return `${hours.toFixed(1)} hours`;
+}
+
+function recommendedBreakHours(workHours) {
+  if (workHours <= 3) return 0;
+  const rawBreak = (workHours - 2) * 0.5;
+  return Math.max(0.5, Math.round(rawBreak * 2) / 2);
+}
+
+function calculateBurnoutRisk() {
+  const workHours = Number(document.querySelector('[data-work-hours]').value);
+  const breakMode = document.querySelector('[data-break-mode]').value;
+  const hours = Number.isFinite(workHours) ? Math.max(0, workHours) : 0;
+  const withoutBreaks = breakMode === 'without';
+  let advice = 'Enter your work hours to get a break suggestion.';
+  let risk = 'Low';
+  let urgent = false;
+
+  if (hours <= 0) {
+    appState.risk = risk;
+    appState.breakAdvice = advice;
+    appState.breakAlert = false;
+    updateDashboard();
+    return;
+  }
+
+  if (hours > 10) {
+    risk = 'High';
+    advice = `You have worked ${formatHours(hours)} today. Take the rest of the day as a break.`;
+    urgent = withoutBreaks;
+  } else if (withoutBreaks) {
+    const breakHours = recommendedBreakHours(hours);
+    if (hours > 8) {
+      risk = 'High';
+    } else if (hours > 4) {
+      risk = 'Moderate';
+    }
+    if (hours > 3) {
+      advice = `You worked ${formatHours(hours)} without breaks. Take at least ${formatHours(breakHours)} of break time.`;
+    } else {
+      advice = `You worked ${formatHours(hours)} without breaks. Take a short reset before continuing.`;
+    }
+    urgent = hours > 5;
+  } else {
+    if (hours > 8) {
+      risk = 'Moderate';
+      advice = `You worked ${formatHours(hours)} with breaks. Keep the rest of the day light if you can.`;
+    } else {
+      risk = 'Low';
+      advice = `You worked ${formatHours(hours)} with breaks. Nice pacing. Keep checking in with your body.`;
+    }
+  }
+
+  appState.risk = risk;
+  appState.breakAdvice = advice;
+  appState.breakAlert = urgent;
+  updateDashboard();
+  if (urgent) {
+    setMascotMessage('Please take a break now. I am red-hot because you need rest.');
+    showToast('Please take a break now.');
+  } else {
+    setMascotMessage('Break check updated. I am watching your pace with you.');
+    showToast('Burnout risk updated.');
+  }
+}
+
+function resetIdleTimer() {
+  mascot.classList.remove('is-idle');
+  clearTimeout(resetIdleTimer.timer);
+  resetIdleTimer.timer = setTimeout(() => {
+    mascot.classList.add('is-idle');
+    setMascotMessage('Zz... I am dozing, but still glowing nearby.');
+  }, 9000);
+}
+
+setTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
+document.body.dataset.mood = appState.mood;
+renderExercises();
+updateDashboard();
+resetIdleTimer();
+
+themeToggle.addEventListener('click', () => {
+  setTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light');
+});
+
+document.addEventListener('click', (event) => {
+  const screenButton = event.target.closest('[data-screen-target]');
+  if (screenButton) setScreen(screenButton.dataset.screenTarget);
+
+  const choice = event.target.closest('.choice-card');
+  if (choice) {
+    choice.classList.toggle('selected');
+    appState.choices = Array.from(document.querySelectorAll('.choice-card.selected')).map((item) => item.dataset.choice);
+    showToast(`${choice.dataset.choice} ${choice.classList.contains('selected') ? 'added' : 'removed'} from your plan.`);
+  }
+
+  const moodButton = event.target.closest('.mood-option');
+  if (moodButton) setMood(moodButton.dataset.mood);
+
+  const resource = event.target.closest('[data-resource]');
+  if (resource) {
+    showToast(`${resource.dataset.resource} started.`);
+    setMascotMessage('Good pick. I will keep the light warm while you try it.');
+  }
+
+  const circle = event.target.closest('[data-circle]');
+  if (circle) {
+    showToast(`Joined ${circle.dataset.circle} as Anonymous Rose.`);
+    setMascotMessage('You joined anonymously. I will sit quietly with you.');
+  }
+
+  const sos = event.target.closest('[data-sos]');
+  if (sos) {
+    document.querySelector('[data-sos-copy]').textContent = sos.dataset.sos === 'Show helpline'
+      ? 'iCall: 9152987821. If someone is in immediate danger, contact local emergency services.'
+      : `${sos.dataset.sos}: start by putting both feet on the floor and breathing out slowly.`;
+    showToast(sos.dataset.sos);
+    setMascotMessage('I am staying bright and steady with you.');
+  }
+
+  const setting = event.target.closest('[data-toggle-setting]');
+  if (setting) {
+    const state = setting.querySelector('[data-setting-state]');
+    state.textContent = state.textContent === 'On' ? 'Off' : 'On';
+    showToast(`${setting.dataset.toggleSetting} turned ${state.textContent.toLowerCase()}.`);
+  }
+
+  resetIdleTimer();
+});
+
+document.querySelector('[data-login-form]').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  appState.user = form.get('name') || 'Alex';
+  document.querySelector('[data-profile-name]').value = appState.user;
+  updateDashboard();
+  setScreen('dashboard');
+  setMascotMessage(`Welcome in, ${appState.user}. I am happy-bright today.`);
+  showToast('Logged in to the interactive prototype.');
+});
+
+document.querySelector('[data-demo-login]').addEventListener('click', () => {
+  appState.user = 'Alex';
+  updateDashboard();
+  setScreen('dashboard');
+  showToast('Demo login ready.');
+});
+
+document.querySelector('[data-energy-meter]').addEventListener('input', (event) => {
+  appState.energy = Number(event.target.value);
+  writeStorage('embercare-energy', appState.energy);
+  updateDashboard();
+});
+
+document.querySelector('[data-check-burnout]').addEventListener('click', calculateBurnoutRisk);
+document.querySelector('[data-work-hours]').addEventListener('change', calculateBurnoutRisk);
+document.querySelector('[data-break-mode]').addEventListener('change', calculateBurnoutRisk);
+
+document.querySelector('[data-save-journal]').addEventListener('click', () => {
+  const note = document.querySelector('[data-journal-input]').value.trim();
+  const reflection = document.querySelector('[data-journal-reflection]');
+  reflection.textContent = note
+    ? 'You named something real. For the next two minutes, choose one gentle action that supports your body first.'
+    : 'Even a blank entry can mean you showed up. Try one sentence: "Right now, I need..."';
+  updateDashboard();
+  setMascotMessage('Journal saved. I am proud-glowing a little.');
+  showToast('Journal entry saved.');
+});
+
+document.querySelector('[data-fill-journal]').addEventListener('click', () => {
+  document.querySelector('[data-journal-input]').value = 'Right now I feel ___ because ___. One thing I can make easier is ___.';
+  showToast('Prompt added.');
+});
+
+document.querySelector('[data-save-profile]').addEventListener('click', () => {
+  appState.user = document.querySelector('[data-profile-name]').value.trim() || 'Alex';
+  updateDashboard();
+  showToast('Profile saved.');
+});
+
+document.querySelectorAll('.app-shell').forEach((el) => {
+  el.classList.add('reveal-ready');
+});
+
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll('.reveal-ready').forEach((el) => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('.reveal-ready').forEach((el) => el.classList.add('is-visible'));
+}
+
+const mascotLines = [
+  "I'm Lumi. I look around with you and glow with your mood.",
+  "If the page goes quiet, I might doze off for a second.",
+  "Tap a feeling and watch my color shift.",
+  "One tiny exercise is enough to change the next minute."
+];
+let mascotIndex = 0;
+function rotateMascotLine() {
+  mascot.classList.remove('is-idle');
+  mascotIndex = (mascotIndex + 1) % mascotLines.length;
+  setMascotMessage(mascotLines[mascotIndex]);
+  resetIdleTimer();
+}
+
+let mascotDrag = null;
+let suppressMascotClick = false;
+
+function moveMascot(clientX, clientY) {
+  const rect = mascot.getBoundingClientRect();
+  const nextLeft = Math.min(window.innerWidth - rect.width - 8, Math.max(8, clientX - mascotDrag.offsetX));
+  const nextTop = Math.min(window.innerHeight - rect.height - 8, Math.max(8, clientY - mascotDrag.offsetY));
+  mascot.style.left = `${nextLeft}px`;
+  mascot.style.top = `${nextTop}px`;
+  mascot.style.right = 'auto';
+  mascot.style.bottom = 'auto';
+}
+
+mascot.addEventListener('click', (event) => {
+  if (suppressMascotClick) {
+    suppressMascotClick = false;
+    event.preventDefault();
+    return;
+  }
+  rotateMascotLine();
+});
+mascot.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    rotateMascotLine();
+  }
+});
+
+mascot.addEventListener('pointerdown', (event) => {
+  if (event.button !== 0) return;
+  const rect = mascot.getBoundingClientRect();
+  mascotDrag = {
+    offsetX: event.clientX - rect.left,
+    offsetY: event.clientY - rect.top,
+    moved: false
+  };
+  mascot.classList.add('dragging');
+  mascot.setPointerCapture(event.pointerId);
+  resetIdleTimer();
+});
+
+mascot.addEventListener('pointermove', (event) => {
+  if (!mascotDrag) return;
+  mascotDrag.moved = true;
+  moveMascot(event.clientX, event.clientY);
+});
+
+mascot.addEventListener('pointerup', (event) => {
+  if (!mascotDrag) return;
+  const didMove = mascotDrag.moved;
+  mascotDrag = null;
+  mascot.classList.remove('dragging');
+  try {
+    mascot.releasePointerCapture(event.pointerId);
+  } catch (error) {}
+  if (didMove) {
+    suppressMascotClick = true;
+    setMascotMessage('Nice, you moved me. I will hang out here.');
+    event.preventDefault();
+  }
+});
+
+['mousemove', 'keydown', 'scroll', 'touchstart'].forEach((eventName) => {
+  window.addEventListener(eventName, resetIdleTimer, { passive: true });
+});
+</script>
+</body>
+</html>
