@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EmberCare</title>
+<title>Mindfulscape</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -1524,7 +1524,7 @@ body[data-break-alert="urgent"] .flame-mouth {
 
 <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light and dark mode"></button>
 
-<div class="mascot flame-friend" role="button" tabindex="0" aria-label="EmberCare flame companion">
+<div class="mascot flame-friend" role="button" tabindex="0" aria-label="Mindfulscape flame companion">
   <div class="mascot-bubble">Hi, I'm Lumi. I glow with your mood and keep you company.</div>
   <div class="flame-body" aria-hidden="true">
     <div class="flame-shadow"></div>
@@ -1548,11 +1548,11 @@ body[data-break-alert="urgent"] .flame-mouth {
     <div class="brand-lockup">
       <div class="brand-mark">E</div>
       <div>
-        <div class="brand-name">EmberCare</div>
+        <div class="brand-name">Mindfulscape</div>
         <div class="brand-sub">Interactive wellness prototype</div>
       </div>
     </div>
-    <nav class="app-nav" aria-label="EmberCare app navigation">
+    <nav class="app-nav" aria-label="Mindfulscape app navigation">
       <button type="button" class="active" data-screen-target="login">Login</button>
       <button type="button" data-screen-target="onboarding">Onboarding</button>
       <button type="button" data-screen-target="dashboard">Dashboard</button>
@@ -1570,7 +1570,7 @@ body[data-break-alert="urgent"] .flame-mouth {
     <div class="auth-grid">
       <div class="app-panel">
         <h1 class="app-title">A calmer campus day starts <span>right here.</span></h1>
-        <p>Sign in with a demo profile and EmberCare will unlock the dashboard, mood tools, journal, circles and SOS support. This is a local prototype, so nothing is sent anywhere.</p>
+        <p>Sign in with a demo profile and Mindfulscape will unlock the dashboard, mood tools, journal, circles and SOS support. This is a local prototype, so nothing is sent anywhere.</p>
         <form class="auth-form" data-login-form>
           <label>Your name
             <input class="app-input" name="name" type="text" value="Alex" autocomplete="name">
@@ -1579,7 +1579,7 @@ body[data-break-alert="urgent"] .flame-mouth {
             <input class="app-input" name="email" type="email" value="alex@student.edu" autocomplete="email">
           </label>
           <label>Password
-            <input class="app-input" name="password" type="password" value="embercare" autocomplete="current-password">
+            <input class="app-input" name="password" type="password" value="Mindfulscape" autocomplete="current-password">
           </label>
           <button class="app-button" type="submit">Continue to dashboard</button>
           <button class="app-button secondary" type="button" data-demo-login>Try instant demo login</button>
@@ -1599,7 +1599,7 @@ body[data-break-alert="urgent"] .flame-mouth {
 
   <section class="app-screen" data-screen="onboarding">
     <div class="app-panel">
-      <h2>Personalise EmberCare</h2>
+      <h2>Personalise Mindfulscape</h2>
       <p>Choose what you want help with. These choices update the dashboard plan.</p>
       <div class="choice-grid" style="margin-top:16px;">
         <button class="choice-card selected" type="button" data-choice="Stress"><strong>Stress</strong><small>Study pressure and deadlines</small></button>
@@ -1624,7 +1624,7 @@ body[data-break-alert="urgent"] .flame-mouth {
           <p data-dashboard-summary>Your current mood is calm. Pick a feeling any time and Lumi will change color with you.</p>
         </div>
         <div class="metric-row">
-          <div class="metric"><b data-streak>7</b><span>day streak</span><small data-streak-copy>Increases once each new day you open EmberCare.</small></div>
+          <div class="metric"><b data-streak>7</b><span>day streak</span><small data-streak-copy>Increases once each new day you open Mindfulscape.</small></div>
           <div class="metric">
             <b data-energy>68%</b>
             <span>energy score</span>
@@ -1674,7 +1674,7 @@ body[data-break-alert="urgent"] .flame-mouth {
     <div class="dash-grid">
       <div class="app-panel">
         <h2>How are you feeling?</h2>
-        <p>Tap one and EmberCare will suggest quick, easy exercises. Lumi changes color to match what you chose.</p>
+        <p>Tap one and Mindfulscape will suggest quick, easy exercises. Lumi changes color to match what you chose.</p>
         <div class="mood-grid" style="margin-top:16px;">
           <button class="mood-option active" type="button" data-mood="calm" style="--mood-color:#ffcf66;"><strong><span class="mood-dot"></span>Calm</strong><small>Keep the balance going</small></button>
           <button class="mood-option" type="button" data-mood="stressed" style="--mood-color:#ef4444;"><strong><span class="mood-dot"></span>Stressed</strong><small>Pressure, deadlines, tension</small></button>
@@ -1705,7 +1705,7 @@ body[data-break-alert="urgent"] .flame-mouth {
       </div>
       <div class="app-panel">
         <h3>Gentle reflection</h3>
-        <p data-journal-reflection>When you save an entry, EmberCare will mirror back a small supportive next step.</p>
+        <p data-journal-reflection>When you save an entry, Mindfulscape will mirror back a small supportive next step.</p>
       </div>
     </div>
   </section>
@@ -1795,7 +1795,7 @@ const userChip = document.querySelector('[data-user-chip]');
 const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 let savedTheme = null;
 try {
-  savedTheme = localStorage.getItem('embercare-theme');
+  savedTheme = localStorage.getItem('Mindfulscape-theme');
 } catch (error) {
   savedTheme = null;
 }
@@ -1826,18 +1826,18 @@ function daysBetween(start, end) {
 
 function getDailyStreak() {
   const today = new Date().toISOString().slice(0, 10);
-  let streak = Math.max(7, readNumber('embercare-streak', 7));
+  let streak = Math.max(7, readNumber('Mindfulscape-streak', 7));
   let lastSeen = null;
   try {
-    lastSeen = localStorage.getItem('embercare-last-seen');
+    lastSeen = localStorage.getItem('Mindfulscape-last-seen');
   } catch (error) {
     lastSeen = null;
   }
   if (lastSeen && lastSeen !== today) {
     streak += daysBetween(lastSeen, today);
   }
-  writeStorage('embercare-streak', streak);
-  writeStorage('embercare-last-seen', today);
+  writeStorage('Mindfulscape-streak', streak);
+  writeStorage('Mindfulscape-last-seen', today);
   return streak;
 }
 
@@ -1845,7 +1845,7 @@ const appState = {
   user: 'Alex',
   mood: 'calm',
   streak: getDailyStreak(),
-  energy: readNumber('embercare-energy', 68),
+  energy: readNumber('Mindfulscape-energy', 68),
   risk: 'Low',
   breakAdvice: 'Enter your work hours to get a break suggestion.',
   breakAlert: false,
@@ -1934,7 +1934,7 @@ function setTheme(mode) {
   themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
   themeToggle.title = isLight ? 'Bulb on: light mode' : 'Bulb off: dark mode';
   try {
-    localStorage.setItem('embercare-theme', mode);
+    localStorage.setItem('Mindfulscape-theme', mode);
   } catch (error) {}
 }
 
@@ -2186,7 +2186,7 @@ document.querySelector('[data-demo-login]').addEventListener('click', () => {
 
 document.querySelector('[data-energy-meter]').addEventListener('input', (event) => {
   appState.energy = Number(event.target.value);
-  writeStorage('embercare-energy', appState.energy);
+  writeStorage('Mindfulscape-energy', appState.energy);
   updateDashboard();
 });
 
