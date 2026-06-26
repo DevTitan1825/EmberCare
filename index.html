@@ -343,7 +343,7 @@ body {
 .toggle { width: 24px; height: 12px; border-radius: 6px; background: #7c3aed; position: relative; }
 .toggle::after { content: ''; position: absolute; right: 2px; top: 2px; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
 
-/* crisis */
+/* crisis */  
 .Lifeline-btn { width: 80px; height: 80px; border-radius: 50%; background: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto; box-shadow: 0 0 0 10px #ef444422, 0 0 0 20px #ef444411; }
 .Lifeline-t { font-size: 1.2rem; font-weight: 900; color: #fff; }
 .Lifeline-s { font-size: 0.5rem; color: #fca5a5; }
@@ -1560,7 +1560,7 @@ body[data-break-alert="urgent"] .flame-mouth {
       <button type="button" data-screen-target="journal">Journal</button>
       <button type="button" data-screen-target="library">Library</button>
       <button type="button" data-screen-target="circles">Circles</button>
-      <button type="button" data-screen-target="Lifeline">Lifeline</button>
+      <button type="button" data-screen-target="Help">Help</button>
       <button type="button" data-screen-target="profile">Profile</button>
     </nav>
     <div class="app-user-chip" data-user-chip>Guest mode</div>
@@ -1570,7 +1570,7 @@ body[data-break-alert="urgent"] .flame-mouth {
     <div class="auth-grid">
       <div class="app-panel">
         <h1 class="app-title">A calmer campus day starts <span>right here.</span></h1>
-        <p>Sign in with a demo profile and Mindfulscape will unlock the dashboard, mood tools, journal, circles and Lifeline support. This is a local prototype, so nothing is sent anywhere.</p>
+        <p>Sign in with a demo profile and Mindfulscape will unlock the dashboard, mood tools, journal, circles and Help support. This is a local prototype, so nothing is sent anywhere.</p>
         <form class="auth-form" data-login-form>
           <label>Your name
             <input class="app-input" name="name" type="text" value="Alex" autocomplete="name">
@@ -1591,7 +1591,7 @@ body[data-break-alert="urgent"] .flame-mouth {
           <button class="quick-tile" type="button" data-screen-target="mood"><strong>Feeling check-in</strong><small>Pick stressed, anxious, upset and more.</small></button>
           <button class="quick-tile" type="button" data-screen-target="journal"><strong>Private journal</strong><small>Write a note and get a gentle reflection.</small></button>
           <button class="quick-tile" type="button" data-screen-target="library"><strong>Exercises</strong><small>Breathing, grounding, rest and focus cards.</small></button>
-          <button class="quick-tile" type="button" data-screen-target="Lifeline"><strong>Support now</strong><small>Fast access to calming tools and crisis contacts.</small></button>
+          <button class="quick-tile" type="button" data-screen-target="Help"><strong>Support now</strong><small>Fast access to calming tools and crisis contacts.</small></button>
         </div>
       </div>
     </div>
@@ -1660,7 +1660,7 @@ body[data-break-alert="urgent"] .flame-mouth {
           <button class="mini-action" type="button" data-screen-target="mood">Check mood</button>
           <button class="mini-action" type="button" data-screen-target="journal">Journal</button>
           <button class="mini-action" type="button" data-screen-target="library">Open exercises</button>
-          <button class="mini-action" type="button" data-screen-target="Lifeline">Lifeline support</button>
+          <button class="mini-action" type="button" data-screen-target="Help">Help support</button>
         </div>
       </div>
       <div class="app-panel">
@@ -1735,7 +1735,7 @@ body[data-break-alert="urgent"] .flame-mouth {
     </div>
   </section>
 
-  <section class="app-screen" data-screen="Lifeline">
+  <section class="app-screen" data-screen="Help">
     <div class="resource-grid">
       <div class="app-panel">
         <h2>Immediate support</h2>
@@ -2147,12 +2147,12 @@ document.addEventListener('click', (event) => {
     setMascotMessage('You joined anonymously. I will sit quietly with you.');
   }
 
-  const Lifeline = event.target.closest('[data-Lifeline]');
-  if (Lifeline) {
-    document.querySelector('[data-Lifeline-copy]').textContent = Lifeline.dataset.Lifeline === 'Show helpline'
+  const Help = event.target.closest('[data-Lifeline]');
+  if (Help) {
+    document.querySelector('[data-Lifeline-copy]').textContent = Help.dataset.Help === 'Show helpline'
       ? 'iCall: 9152987821. If someone is in immediate danger, contact local emergency services.'
-      : `${Lifeline.dataset.Lifeline}: start by putting both feet on the floor and breathing out slowly.`;
-    showToast(Lifeline.dataset.Lifeline);
+      : `${Help.dataset.Help}: start by putting both feet on the floor and breathing out slowly.`;
+    showToast(Help.dataset.Help);
     setMascotMessage('I am staying bright and steady with you.');
   }
 
