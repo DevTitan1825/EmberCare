@@ -344,9 +344,9 @@ body {
 .toggle::after { content: ''; position: absolute; right: 2px; top: 2px; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
 
 /* crisis */
-.sos-btn { width: 80px; height: 80px; border-radius: 50%; background: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto; box-shadow: 0 0 0 10px #ef444422, 0 0 0 20px #ef444411; }
-.sos-t { font-size: 1.2rem; font-weight: 900; color: #fff; }
-.sos-s { font-size: 0.5rem; color: #fca5a5; }
+.Lifeline-btn { width: 80px; height: 80px; border-radius: 50%; background: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto; box-shadow: 0 0 0 10px #ef444422, 0 0 0 20px #ef444411; }
+.Lifeline-t { font-size: 1.2rem; font-weight: 900; color: #fff; }
+.Lifeline-s { font-size: 0.5rem; color: #fca5a5; }
 
 /* section divider rule */
 .section-end-pad { height: 0; }
@@ -1560,7 +1560,7 @@ body[data-break-alert="urgent"] .flame-mouth {
       <button type="button" data-screen-target="journal">Journal</button>
       <button type="button" data-screen-target="library">Library</button>
       <button type="button" data-screen-target="circles">Circles</button>
-      <button type="button" data-screen-target="sos">SOS</button>
+      <button type="button" data-screen-target="Lifeline">Lifeline</button>
       <button type="button" data-screen-target="profile">Profile</button>
     </nav>
     <div class="app-user-chip" data-user-chip>Guest mode</div>
@@ -1570,7 +1570,7 @@ body[data-break-alert="urgent"] .flame-mouth {
     <div class="auth-grid">
       <div class="app-panel">
         <h1 class="app-title">A calmer campus day starts <span>right here.</span></h1>
-        <p>Sign in with a demo profile and Mindfulscape will unlock the dashboard, mood tools, journal, circles and SOS support. This is a local prototype, so nothing is sent anywhere.</p>
+        <p>Sign in with a demo profile and Mindfulscape will unlock the dashboard, mood tools, journal, circles and Lifeline support. This is a local prototype, so nothing is sent anywhere.</p>
         <form class="auth-form" data-login-form>
           <label>Your name
             <input class="app-input" name="name" type="text" value="Alex" autocomplete="name">
@@ -1591,7 +1591,7 @@ body[data-break-alert="urgent"] .flame-mouth {
           <button class="quick-tile" type="button" data-screen-target="mood"><strong>Feeling check-in</strong><small>Pick stressed, anxious, upset and more.</small></button>
           <button class="quick-tile" type="button" data-screen-target="journal"><strong>Private journal</strong><small>Write a note and get a gentle reflection.</small></button>
           <button class="quick-tile" type="button" data-screen-target="library"><strong>Exercises</strong><small>Breathing, grounding, rest and focus cards.</small></button>
-          <button class="quick-tile" type="button" data-screen-target="sos"><strong>Support now</strong><small>Fast access to calming tools and crisis contacts.</small></button>
+          <button class="quick-tile" type="button" data-screen-target="Lifeline"><strong>Support now</strong><small>Fast access to calming tools and crisis contacts.</small></button>
         </div>
       </div>
     </div>
@@ -1660,7 +1660,7 @@ body[data-break-alert="urgent"] .flame-mouth {
           <button class="mini-action" type="button" data-screen-target="mood">Check mood</button>
           <button class="mini-action" type="button" data-screen-target="journal">Journal</button>
           <button class="mini-action" type="button" data-screen-target="library">Open exercises</button>
-          <button class="mini-action" type="button" data-screen-target="sos">SOS support</button>
+          <button class="mini-action" type="button" data-screen-target="Lifeline">Lifeline support</button>
         </div>
       </div>
       <div class="app-panel">
@@ -1735,20 +1735,20 @@ body[data-break-alert="urgent"] .flame-mouth {
     </div>
   </section>
 
-  <section class="app-screen" data-screen="sos">
+  <section class="app-screen" data-screen="Lifeline">
     <div class="resource-grid">
       <div class="app-panel">
         <h2>Immediate support</h2>
         <p>If someone may be in immediate danger, contact local emergency services. This screen keeps calm tools and contacts close.</p>
         <div class="quick-grid" style="margin-top:16px;">
-          <button class="quick-tile" type="button" data-sos="Start 60-second grounding"><strong>Ground me now</strong><small>60-second sensory reset</small></button>
-          <button class="quick-tile" type="button" data-sos="Open counsellor chat"><strong>Counsellor chat</strong><small>Simulated university support</small></button>
-          <button class="quick-tile" type="button" data-sos="Show helpline"><strong>Crisis helpline</strong><small>iCall 9152987821</small></button>
+          <button class="quick-tile" type="button" data-Lifeline="Start 60-second grounding"><strong>Ground me now</strong><small>60-second sensory reset</small></button>
+          <button class="quick-tile" type="button" data-Lifeline="Open counsellor chat"><strong>Counsellor chat</strong><small>Simulated university support</small></button>
+          <button class="quick-tile" type="button" data-Lifeline="Show helpline"><strong>Crisis helpline</strong><small>iCall 9152987821</small></button>
         </div>
       </div>
       <div class="app-panel">
         <h3>Calm prompt</h3>
-        <p data-sos-copy>Put both feet on the floor. Name five things you can see. Let Lumi stay bright beside you.</p>
+        <p data-Lifeline-copy>Put both feet on the floor. Name five things you can see. Let Lumi stay bright beside you.</p>
       </div>
     </div>
   </section>
@@ -1825,7 +1825,7 @@ function daysBetween(start, end) {
 }
 
 function getDailyStreak() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = new Date().toILifelinetring().slice(0, 10);
   let streak = Math.max(7, readNumber('Mindfulscape-streak', 7));
   let lastSeen = null;
   try {
@@ -2147,12 +2147,12 @@ document.addEventListener('click', (event) => {
     setMascotMessage('You joined anonymously. I will sit quietly with you.');
   }
 
-  const sos = event.target.closest('[data-sos]');
-  if (sos) {
-    document.querySelector('[data-sos-copy]').textContent = sos.dataset.sos === 'Show helpline'
+  const Lifeline = event.target.closest('[data-Lifeline]');
+  if (Lifeline) {
+    document.querySelector('[data-Lifeline-copy]').textContent = Lifeline.dataset.Lifeline === 'Show helpline'
       ? 'iCall: 9152987821. If someone is in immediate danger, contact local emergency services.'
-      : `${sos.dataset.sos}: start by putting both feet on the floor and breathing out slowly.`;
-    showToast(sos.dataset.sos);
+      : `${Lifeline.dataset.Lifeline}: start by putting both feet on the floor and breathing out slowly.`;
+    showToast(Lifeline.dataset.Lifeline);
     setMascotMessage('I am staying bright and steady with you.');
   }
 
